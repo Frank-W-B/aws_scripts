@@ -4,16 +4,14 @@ import boto3
 s3 = boto3.resource('s3')
 
 
-def to_bucket(f, bucket):
+def to_bucket(f, bucket, write_path):
+    '''
+    Write files to s3 bucket.
+
+    INPUT: f - file to write
+           bucket - bucket to write to
+           write_path - path in bucket to write file 
+    '''
     data = open(f, 'rb')
-    s3.Bucket(my_bucket).put_object(Key=f, Body=data)
-    print('Success! {} added to {} bucket'.format(f, bucket))
-
-
-if __name__ == '__main__':
-    # Specify the bucket to write to
-    my_bucket = 'quora-bwl'
-    # File to move
-    f = 'test_cleaned.csv'
-    # Open file and put it in the bucket
-    to_bucket(f, my_bucket)
+    s3.Bucket(my_bucket).put_object(Key='{}/{}'.format(write_path, f), Body=data)
+    print('Success! {} added to {} bucket @ {}'.format(f, bucket, write_path))
