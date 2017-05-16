@@ -24,4 +24,4 @@ def download_file(f, bucket, write_path):
 
 if __name__ == '__main__':
     _, f, bucket_name, write_path = argv
-    download_file(bucket_name, write_path)
+    download_file(f, bucket_name, write_path)
